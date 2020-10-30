@@ -19,8 +19,13 @@ def showgameboard(gameboard,display):
         print("4 | 5 | 6")
         print("---------")
         print("7 | 8 | 9")
-    #elif display=="game":
+    elif display=="game":
         #code for displaying board during turns
+        print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
+        print("---------")
+        print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
+        print("---------")
+        print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -82,10 +87,13 @@ def rand_start():
 def user_turn(player, gameboard, p1_symbol, p2_symbol):
     turn = True
     while(turn):
-        print(gameboard)
+        showgameboard(gameboard, "game")
         #prompts player to input move (index 1-9)
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
+        while not position >= 0 or position <= 8:
+            position = input("Choose a position from 1-9: ")
+            position = int(position) - 1
         if(gameboard[position] == "-"):
             if(player):
                 gameboard[position] = p1_symbol
@@ -221,8 +229,10 @@ def play_tic_tac_toe():
         print ("Tie Game.")
         game_being_played = False
 
-    play_again = eval('Would you like to play again? Enter "Y" for yes or "N" for no.')
-    if (play_again == "Y" or play_again == "y"):
+    play_again = eval('Would you like to play again? Enter yes or no.')
+    #will handle any variation by turning whole string to uppercase
+    play_again = play_again.upper()
+    if (play_again == "YES" or play_again == "Y"):
         play_tic_tac_toe()
     else:
         exit()
