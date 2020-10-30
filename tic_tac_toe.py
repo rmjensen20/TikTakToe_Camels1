@@ -19,13 +19,8 @@ def showgameboard(gameboard,display):
         print("4 | 5 | 6")
         print("---------")
         print("7 | 8 | 9")
-    elif display=="game":
+    #elif display=="game":
         #code for displaying board during turns
-        print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
-        print("---------")
-        print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
-        print("---------")
-        print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -87,13 +82,10 @@ def rand_start():
 def user_turn(player, gameboard, p1_symbol, p2_symbol):
     turn = True
     while(turn):
-        showgameboard(gameboard, "game")
+        print(gameboard)
         #prompts player to input move (index 1-9)
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
-        while not position >= 0 or position <= 8:
-            position = input("Choose a position from 1-9: ")
-            position = int(position) - 1
         if(gameboard[position] == "-"):
             if(player):
                 gameboard[position] = p1_symbol
@@ -104,89 +96,100 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol):
         else:
             print("That position is already taken, please enter a new one.")
    
-def win_check(gameboard):
-    #checks if win
-    global winner
+def win_check(gameboard, playernames, p1_symbol, p2_symbol):
     
     #check rows
-    row_winner = check_rows(gameboard)
-    
+    if(check_rows(gameboard)):
+        return True
     #check columns
-    column_winner = check_columns(gameboard)
-    
+    if(check_columns(gameboard)):
+        return True
     #check diagonals
-    diag_winner = check_diagonals(gameboard)
-    
-    if row_winner:
-        winner = row_winner
-    elif column_winner:
-        winner = column_winner
-    elif diag_winner:
-        winner = diagonal_winner
-        
+    if(check_diagonals(gameboard)):
+        return True
     else:
-        winner = None
-    return
+        return False
     
-def check_rows(gameboard):
+def check_rows(gameboard, playernames, p1_symbol, p2_symbol):
     global game_being_played
     
-    row_1 = gameboard[0] == gameboard[1] == gameboard[2] !=  "-" 
-    row_2 = gameboard[3] == gameboard[4] == gameboard[5] !=  "-"
-    row_3 = gameboard[6] == gameboard[7] == gameboard[8] !=  "-"
-    
-    if row_1 or row_2 or row_3:
-        game_being_played = False
-        
-    if row_1:
-        return gameboard[0]
-    elif row_2:
-        return gameboard[3]
-    elif row_3:
-        return gameboard[6]
-    return
+    if(gameboard[0] == gameboard[1] == gameboard[2] and gameboard[0] !=  "-"):
+        if(gameboard[0] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    elif(gameboard[3] == gameboard[4] == gameboard[5] and gameboard[3] !=  "-"):
+        if(gameboard[3] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    elif(gameboard[6] == gameboard[7] == gameboard[8] and gameboard[8] !=  "-"):
+        if(gameboard[6] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    else:
+        return None
 
-def check_columns(gameboard):
+def check_columns(gameboard, playernames, p1_symbol, p2_symbol):
     global game_being_played
     
-    column_1 = gameboard[0] == gameboard[3] == gameboard[6] !=  "-" 
-    column_2 = gameboard[1] == gameboard[4] == gameboard[7] !=  "-"
-    column_3 = gameboard[2] == gameboard[5] == gameboard[8] !=  "-"
-    
-    if column_1 or column_2 or column_3:
-        game_being_played = False
-        
-    if column_1:
-        return gameboard[0]
-    elif column_2:
-        return gameboard[1]
-    elif column_3:
-        return gameboard[2]
-    return       
+    if(gameboard[0] == gameboard[3] == gameboard[6] and gameboard[0] !=  "-"):
+        if(gameboard[0] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    elif(gameboard[1] == gameboard[4] == gameboard[7] and gameboard[1] !=  "-"):
+        if(gameboard[1] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    elif(gameboard[2] == gameboard[5] == gameboard[8] and gameboard[2] !=  "-"):
+        if(gameboard[2] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    else:
+        return None    
 
-def check_diagonals(gameboard):
+def check_diagonals(gameboard, playernames, p1_symbol, p2_symbol):
     global game_being_played
-    
-    diagonals_1 = gameboard[0] == gameboard[4] == gameboard[8] !=  "-" 
-    diagonals_2 = gameboard[6] == gameboard[4] == gameboard[2] !=  "-"
-    
-    
-    if diagonals_1 or diagonals_2:
-        game_being_played = False
-        
-    if diagonals_1:
-        return gameboard[0]
-    elif diagonals_2:
-        return gameboard[6]
-    return       
+
+    if(gameboard[0] == gameboard[4] == gameboard[8] and gameboard[0] !=  "-"):
+        if(gameboard[0] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    elif(gameboard[2] == gameboard[4] == gameboard[6] and gameboard[2] !=  "-"):
+        if(gameboard[2] == p1_symbol):
+            winner = playernames[0]
+            return winner
+        else:
+            winner = playernames[1]
+            return winner
+    else:
+        return None
 
 def tie_check(gameboard):
     global game_being_played 
     
     #Checks if board is full and there is a tie
     if "-" not in gameboard:
-        game_being_played = False
-    return
+        return True
 
 def switch_player():
     global current_player
@@ -218,21 +221,25 @@ def play_tic_tac_toe():
     while game_being_played:
         user_turn(current_player, gameboard, p1_symbol, p2_symbol)
     
-        win_check(gameboard)
-    
-        switch_player()
-            
-    if winner == p1_name or winner == p2_name:
-        print(winner + "won!")
-        game_being_played = False
-    elif winner == None:
-        print ("Tie Game.")
-        game_being_played = False
+        if(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0]):
+            winner = playernames[0]
+            print(winner, "wins!")
+            print(gameboard)
+            game_being_played = False
+        elif(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1]):
+             winner = playernames[1]
+             print(winner, "wins!")
+             print(gameboard)
+             game_being_played = False
+        elif(tie_check(gameboard)):
+            print("It's a tie!")
+            print(gameboard)
+            game_being_played = False
+        else:
+            switch_player()
 
-    play_again = eval('Would you like to play again? Enter yes or no.')
-    #will handle any variation by turning whole string to uppercase
-    play_again = play_again.upper()
-    if (play_again == "YES" or play_again == "Y"):
+    play_again = eval(input('Would you like to play again? Enter "Y" for yes or "N" for no.'))
+    if (play_again == "Y" or play_again == "y"):
         play_tic_tac_toe()
     else:
         exit()
