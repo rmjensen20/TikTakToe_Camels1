@@ -19,8 +19,39 @@ def showgameboard(gameboard,display):
         print("4 | 5 | 6")
         print("---------")
         print("7 | 8 | 9")
-    #elif display=="game":
-        #code for displaying board during turns
+    elif display=="game":
+        gameline=['-',' ','|',' ','-',' ','|',' ','-']
+        index=0
+        for item in gameboard[0:3]:
+            if item == 'X':
+                gameline[index] = 'X'
+            elif item == 'O':
+                gameline[index] = 'O'
+            index+=4
+        print("".join(gameline))
+        print("---------")
+
+        gameline2=['-',' ','|',' ','-',' ','|',' ','-']
+        index=0
+        for item in gameboard[3:6]:
+            if item == 'X':
+                gameline2[index] = 'X'
+            elif item == 'O':
+                gameline2[index] = 'O'
+            index+=4
+        print("".join(gameline2))
+        print("---------")
+
+        gameline3=['-',' ','|',' ','-',' ','|',' ','-']
+        index=0
+        for item in gameboard[6:]:
+            if item == 'X':
+                gameline3[index] = 'X'
+            elif item == 'O':
+                gameline3[index] = 'O'
+            index+=4
+        print("".join(gameline3))
+        print("---------")
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -82,7 +113,7 @@ def rand_start():
 def user_turn(player, gameboard, p1_symbol, p2_symbol):
     turn = True
     while(turn):
-        print(gameboard)
+        showgameboard(gameboard,"game")
         #prompts player to input move (index 1-9)
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
@@ -224,21 +255,21 @@ def play_tic_tac_toe():
         if(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0]):
             winner = playernames[0]
             print(winner, "wins!")
-            print(gameboard)
+            showgameboard(gameboard,"game")
             game_being_played = False
         elif(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[1]):
              winner = playernames[1]
              print(winner, "wins!")
-             print(gameboard)
+             showgameboard(gameboard,"game")
              game_being_played = False
         elif(tie_check(gameboard)):
             print("It's a tie!")
-            print(gameboard)
+            showgameboard(gameboard,"game")
             game_being_played = False
         else:
             switch_player()
 
-    play_again = eval(input('Would you like to play again? Enter "Y" for yes or "N" for no.'))
+    play_again = input('Would you like to play again? Enter "Y" for yes or "N" for no.')
     if (play_again == "Y" or play_again == "y"):
         play_tic_tac_toe()
     else:
