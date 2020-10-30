@@ -2,8 +2,7 @@ from random import *
 
 game_being_played = True
 winner = None
-current_player = None
-
+current_player = True
 
 def init_gameboard():
     #creating board
@@ -44,35 +43,43 @@ def get_names():
 
 def pick_symbol(names):
     #user picks symbols
-    p1_string = str(names[0]) + " enter your symbol (X/O): "
-    p1_symbol = input(p1_string)
+    picking = True
+    while(picking):
+        p1_string = str(names[0]) + " enter your symbol (X/O): "
+        p1_symbol = input(p1_string)
 
-    if p1_symbol == "X":
-        p2_symbol = "O"
-        print(names[1]+", your symbol is 'O'.")
-        print(names[0]+", your symbol is 'X'.")
-    else:
-        p2_symbol="X"
-        print(names[0]+", your symbol is 'O'.")
-        print(names[1]+", your symbol is 'X'.")
+        if p1_symbol == "X" or p1_symbol == "x":
+            p1_symbol = "X"
+            p2_symbol = "O"
+            print(names[1]+", your symbol is 'O'.")
+            print(names[0]+", your symbol is 'X'.")
+            picking = False
+        elif p1_symbol == "O" or p1_symbol == "o":
+            p1_symbol = "O"
+            p2_symbol="X"
+            print(names[0]+", your symbol is 'O'.")
+            print(names[1]+", your symbol is 'X'.")
+            picking = False
+        else:
+            print("Sorry, that is not an option. Please enter X or O.")
         
     playerdata ={
         names[0]:p1_symbol,
         names[1]:p2_symbol
     }
-    return playerdata
+    return p1_symbol, p2_symbol
 
 def rand_start():
     #randomly picks which player is going to start
-    starting = randrange(0,1)
+    starting = randrange(0,2)
     if starting == 0:
-        current_player = p1_symbol
+        current_player = True
         return "1"
     else:
-        current_player = p2_symbol
+        current_player = False
         return "2"
     
-def user_turn(player):
+def user_turn(player, gameboard, p1_symbol, p2_symbol):
     turn = True
     while(turn):
         print(gameboard)
@@ -80,36 +87,40 @@ def user_turn(player):
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
         if(gameboard[position] == "-"):
-            gameboard[position] = player
-            turn = False
+            if(player):
+                gameboard[position] = p1_symbol
+                turn = False
+            else:
+                gameboard[position] = p2_symbol
+                turn = False
         else:
             print("That position is already taken, please enter a new one.")
    
-def win_check():
+def win_check(gameboard):
     #checks if win
     global winner
     
     #check rows
-    row_winner = check_rows()
+    row_winner = check_rows(gameboard)
     
     #check columns
-    column_winner = check_columns()
+    column_winner = check_columns(gameboard)
     
     #check diagonals
-    diag_winner = check_diagonals()
+    diag_winner = check_diagonals(gameboard)
     
     if row_winner:
         winner = row_winner
     elif column_winner:
         winner = column_winner
-    elif diagonal_winner:
+    elif diag_winner:
         winner = diagonal_winner
         
     else:
         winner = None
     return
     
-def check_rows():
+def check_rows(gameboard):
     global game_being_played
     
     row_1 = gameboard[0] == gameboard[1] == gameboard[2] !=  "-" 
@@ -127,7 +138,7 @@ def check_rows():
         return gameboard[6]
     return
 
-def check_columns():
+def check_columns(gameboard):
     global game_being_played
     
     column_1 = gameboard[0] == gameboard[3] == gameboard[6] !=  "-" 
@@ -145,7 +156,7 @@ def check_columns():
         return gameboard[2]
     return       
 
-def check_diagonals():
+def check_diagonals(gameboard):
     global game_being_played
     
     diagonals_1 = gameboard[0] == gameboard[4] == gameboard[8] !=  "-" 
@@ -161,7 +172,7 @@ def check_diagonals():
         return gameboard[6]
     return       
 
-def tie_check():
+def tie_check(gameboard):
     global game_being_played 
     
     #Checks if board is full and there is a tie
@@ -172,10 +183,10 @@ def tie_check():
 def switch_player():
     global current_player
     
-    if current_player == p1_symbol:
-        current_player = p2_symbol
-    elif current_player == p2_symbol:
-        current_player = p1_symbol
+    if current_player == True:
+        current_player = False
+    elif current_player == False:
+        current_player = True
     return
     
 def new_game():
@@ -188,13 +199,18 @@ def new_game():
     start = rand_start()
     
 def play_tic_tac_toe():
-    new_game()
+    gameboard=init_gameboard()
+    introdisplay="index"
+    print_instructions(gameboard,introdisplay)
+    playernames=get_names()
+    p1_symbol, p2_symbol=pick_symbol(playernames)
+    start = rand_start()
     game_being_played = True
 
     while game_being_played:
-        user_turn(current_player)
+        user_turn(current_player, gameboard, p1_symbol, p2_symbol)
     
-        win_check()
+        win_check(gameboard)
     
         switch_player()
             
