@@ -68,12 +68,17 @@ def rand_start():
         return "2"
     
 def user_turn(player):
-    
-    #prompts player to input move (index 1-9)
-    position = input("Choose a position from 1-9: ")
-    position = int(position) - 1
-    
-    gameboard[position] = player
+    turn = True
+    while(turn):
+        print(gameboard)
+        #prompts player to input move (index 1-9)
+        position = input("Choose a position from 1-9: ")
+        position = int(position) - 1
+        if(gameboard[position] == "-"):
+            gameboard[position] = player
+            turn = False
+        else:
+            print("That position is already taken, please enter a new one.")
    
 def win_check():
     #checks if win
