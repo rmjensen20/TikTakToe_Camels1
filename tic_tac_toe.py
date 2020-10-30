@@ -73,23 +73,17 @@ def rand_start():
         return "2"
     
 def user_turn(player):
-    check = True
-    #prompts player to input move (index 1-9)
-    while check == True:
+    turn = True
+    while(turn):
+        showgameboard(gameboard, "game")
+        #prompts player to input move (index 1-9)
         position = input("Choose a position from 1-9: ")
-        #need to check here that input is a string 
-
         position = int(position) - 1
-        #if a valid index, continue
-        if position <= 8 and position >= 0:
-            #check if the position is empty
-            if gameboard[position] == "-":
-                #If empty exit the while loop
-                check = False
+        if(gameboard[position] == "-"):
+            gameboard[position] = player
+            turn = False
         else:
-            check = True
-    #Since the positon is valid we can set that index to X or O
-    gameboard[position] = player
+            print("That position is already taken, please enter a new one.")
    
 def win_check():
     #checks if win
