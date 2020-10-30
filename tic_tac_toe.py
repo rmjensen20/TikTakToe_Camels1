@@ -3,6 +3,7 @@ from random import *
 game_being_played = True
 winner = None
 current_player = player
+gameboard = gameboard
 
 
 def init_gameboard():
