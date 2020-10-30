@@ -269,11 +269,16 @@ def play_tic_tac_toe():
         else:
             switch_player()
 
-    play_again = input('Would you like to play again? Enter "Y" for yes or "N" for no.')
-    if (play_again == "Y" or play_again == "y"):
-        play_tic_tac_toe()
-    else:
-        exit()
+    playing_again = True
+    while(playing_again):
+        play_again = input('Would you like to play again? Enter "Y" for yes or "N" for no.')
+        if (play_again == "Y" or play_again == "y"):
+            play_tic_tac_toe()
+            playing_again = False
+        elif(play_again == "N" or play_again == "n"):
+            exit()
+        else:
+            print("Please enter Y or N")
 
 play_tic_tac_toe()
     
