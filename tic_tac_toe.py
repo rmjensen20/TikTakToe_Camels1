@@ -22,8 +22,13 @@ def play_tic_tac_toe():
             print("4 | 5 | 6")
             print("---------")
             print("7 | 8 | 9")
-        #elif display=="game":
+        elif display=="game":
             #code for displaying board during turns
+            print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
+            print("---------")
+            print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
+            print("---------")
+            print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
 
     def print_instructions(gameboard,display):
         #introductory print
@@ -70,13 +75,25 @@ def play_tic_tac_toe():
             return "2"
         
     def user_turn(player):
-        
+        check = True
         #prompts player to input move (index 1-9)
-        position = input("Choose a position from 1-9: ")
-        position = int(position) - 1
-        
+        while check == True:
+            position = input("Choose a position from 1-9: ")
+            #need to check here that input is a string 
+
+            position = int(position) - 1
+            #if a valid index, continue
+            if position <= 8 and position >= 0:
+                #check if the position is empty
+                if gameboard[position] == "-":
+                    #If empty exit the while loop
+                    check = False
+            else:
+                check = True
+        #Since the positon is valid we can set that index to X or O
         gameboard[position] = player
-       
+        
+
     def win_check():
         #checks if win
         global winner
@@ -172,6 +189,16 @@ def play_tic_tac_toe():
         
     def new_game():
         #if win_check is true, initialize a new game
+        newGame = input("Would you like to play a new game? Enter Yes or No ")
+        #will add more input options later
+        newGame = newGame.upper()
+        if newGame == "YES" or newGame == "Y":
+            main()
+        else:
+            #quit the program
+            exit()
+            
+
         
     def main():
         gameboard=init_gameboard()
@@ -193,6 +220,9 @@ def play_tic_tac_toe():
             print(winner + "won!")
         elif winner == None:
             print ("Tie Game.")
+
+        new_game()
+
     main()
 
 play_tic_tac_toe()
