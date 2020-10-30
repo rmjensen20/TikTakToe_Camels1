@@ -2,8 +2,7 @@ from random import *
 
 game_being_played = True
 winner = None
-current_player = player
-gameboard = gameboard
+current_player = None
 
 
 def init_gameboard():
@@ -21,13 +20,8 @@ def showgameboard(gameboard,display):
         print("4 | 5 | 6")
         print("---------")
         print("7 | 8 | 9")
-    elif display=="game":
+    #elif display=="game":
         #code for displaying board during turns
-        print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
-        print("---------")
-        print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
-        print("---------")
-        print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -56,9 +50,12 @@ def pick_symbol(names):
     if p1_symbol == "X":
         p2_symbol = "O"
         print(names[1]+", your symbol is 'O'.")
+        print(names[0]+", your symbol is 'X'.")
     else:
         p2_symbol="X"
+        print(names[0]+", your symbol is 'O'.")
         print(names[1]+", your symbol is 'X'.")
+        
     playerdata ={
         names[0]:p1_symbol,
         names[1]:p2_symbol
@@ -69,14 +66,16 @@ def rand_start():
     #randomly picks which player is going to start
     starting = randrange(0,1)
     if starting == 0:
+        current_player = p1_symbol
         return "1"
     else:
+        current_player = p2_symbol
         return "2"
     
 def user_turn(player):
     turn = True
     while(turn):
-        showgameboard(gameboard, "game")
+        print(gameboard)
         #prompts player to input move (index 1-9)
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
@@ -206,9 +205,8 @@ def play_tic_tac_toe():
         print ("Tie Game.")
         game_being_played = False
 
-    play_again = input('Would you like to play again? Enter yes or no.')
-    play_again = play_again.upper()
-    if (play_again == "Y" or play_again == "YES"):
+    play_again = eval('Would you like to play again? Enter "Y" for yes or "N" for no.')
+    if (play_again == "Y" or play_again == "y"):
         play_tic_tac_toe()
     else:
         exit()
