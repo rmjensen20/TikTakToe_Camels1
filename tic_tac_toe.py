@@ -21,12 +21,15 @@ def showgameboard(gameboard,display):
         print("7 | 8 | 9")
     elif display=="game":
         #I beleive it can be accompished with just 5 lines
-        #print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
-        #print("---------")
-        #print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
-        #print("---------")
-        #print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
-        gameline=['-',' ','|',' ','-',' ','|',' ','-']
+        #Can confirm that this works perfectly
+        print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
+        print("---------")
+        print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
+        print("---------")
+        print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
+
+        #Don't need any of this down here
+        """ gameline=['-',' ','|',' ','-',' ','|',' ','-']
         index=0
         for item in gameboard[0:3]:
             if item == 'X':
@@ -57,7 +60,7 @@ def showgameboard(gameboard,display):
                 gameline3[index] = 'O'
             index+=4
         print("".join(gameline3))
-        print("---------")
+        print("---------") """
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -119,8 +122,17 @@ def rand_start():
 def user_turn(player, gameboard, p1_symbol, p2_symbol):
     turn = True
     while(turn):
+        #empty print statements to create more spacing
+        print()
+        #put the index board in every turn so its easier for the user
+        showgameboard(gameboard, "index")
+        print()
+        print("=========")
+        print()
         showgameboard(gameboard,"game")
         #prompts player to input move (index 1-9)
+        #should say here whos turn it is
+        print(" it is your turn")
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
         if(gameboard[position] == "-"):
@@ -277,7 +289,7 @@ def play_tic_tac_toe():
 
     playing_again = True
     while(playing_again):
-        play_again = input('Would you like to play again? Enter yes or no.')
+        play_again = input('Would you like to play again? Enter yes or no: ')
         #directions say we must account for all inputs
         play_again = play_again.upper()
         if (play_again == "Y" or play_again == "YES"):
@@ -286,7 +298,7 @@ def play_tic_tac_toe():
         elif(play_again == "N" or play_again == "NO"):
             exit()
         else:
-            print("Please enter yes or no")
+            print("Please enter yes or no: ")
 
 play_tic_tac_toe()
     
