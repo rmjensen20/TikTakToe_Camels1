@@ -119,8 +119,13 @@ def rand_start():
         current_player = False
         return "2"
     
-def user_turn(player, gameboard, p1_symbol, p2_symbol):
+def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
     turn = True
+    #sets the correct name for the player
+    if(player):
+        name = playernames[0]
+    else:
+        name = playernames[1]
     while(turn):
         #empty print statements to create more spacing
         print()
@@ -132,7 +137,7 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol):
         showgameboard(gameboard,"game")
         #prompts player to input move (index 1-9)
         #should say here whos turn it is
-        print(" it is your turn")
+        print(name + " it is your turn")
         position = input("Choose a position from 1-9: ")
         position = int(position) - 1
         if(gameboard[position] == "-"):
@@ -268,7 +273,7 @@ def play_tic_tac_toe():
     game_being_played = True
 
     while game_being_played:
-        user_turn(current_player, gameboard, p1_symbol, p2_symbol)
+        user_turn(current_player, gameboard, p1_symbol, p2_symbol,playernames)
     
         if(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0]):
             winner = playernames[0]
