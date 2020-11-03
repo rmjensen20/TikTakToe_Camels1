@@ -20,6 +20,12 @@ def showgameboard(gameboard,display):
         print("---------")
         print("7 | 8 | 9")
     elif display=="game":
+        #I beleive it can be accompished with just 5 lines
+        #print(gameboard[0]+" | "+gameboard[1]+" | "+gameboard[2])
+        #print("---------")
+        #print(gameboard[3]+" | "+gameboard[4]+" | "+gameboard[5])
+        #print("---------")
+        #print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
         gameline=['-',' ','|',' ','-',' ','|',' ','-']
         index=0
         for item in gameboard[0:3]:
@@ -271,14 +277,16 @@ def play_tic_tac_toe():
 
     playing_again = True
     while(playing_again):
-        play_again = input('Would you like to play again? Enter "Y" for yes or "N" for no.')
-        if (play_again == "Y" or play_again == "y"):
+        play_again = input('Would you like to play again? Enter yes or no.')
+        #directions say we must account for all inputs
+        play_again = play_again.upper()
+        if (play_again == "Y" or play_again == "YES"):
             play_tic_tac_toe()
             playing_again = False
-        elif(play_again == "N" or play_again == "n"):
+        elif(play_again == "N" or play_again == "NO"):
             exit()
         else:
-            print("Please enter Y or N")
+            print("Please enter yes or no")
 
 play_tic_tac_toe()
     
