@@ -110,13 +110,11 @@ def pick_symbol(names):
     return p1_symbol, p2_symbol
 
 def rand_start():
-    #randomly picks which player is going to start
-    starting = randrange(0,2)
-    if starting == 0:
-        current_player = True
+    #randomly picks which player is going to start, this works now
+    starting = randrange(0,101)  
+    if starting < 50:
         return "1"
     else:
-        current_player = False
         return "2"
     
 def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
@@ -253,7 +251,8 @@ def switch_player():
     elif current_player == False:
         current_player = True
     return
-    
+
+#Dont think we ever actually use this   
 def new_game():
     #if win_check is true, initialize a new game
     gameboard=init_gameboard()
@@ -262,6 +261,8 @@ def new_game():
     playernames=get_names()
     playerdata=pick_symbol(playernames)
     start = rand_start()
+    if (start == "2"):
+        switch_player()
     
 def play_tic_tac_toe():
     gameboard=init_gameboard()
@@ -270,6 +271,9 @@ def play_tic_tac_toe():
     playernames=get_names()
     p1_symbol, p2_symbol=pick_symbol(playernames)
     start = rand_start()
+    #player 2 is randomly starting so switch players
+    if (start == "2"):
+        switch_player()
     game_being_played = True
 
     while game_being_played:
