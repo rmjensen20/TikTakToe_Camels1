@@ -16,11 +16,16 @@ class Test(unittest.TestCase):
             print("Unsuitable Randomness")
                 
     def testWin(self):
+        self.assertTrue(tic_tac_toe.check_rows, "Win not found in rows")
+        self.assertTrue(tic_tac_toe.check_columns, "Win not found in columns")
+        self.assertTrue(tic_tac_toe.check_diagonals, "Win not found in diagonals")
         self.assertTrue(tic_tac_toe().win_check, "Win not found")
 
     def testInput(self):
         validInput = ["X","x","O","o"]
-        self.assertIn(tic_tac_toe().pick_symbol, validInput, "Did not pick a valid input")
+        result = tic_tac_toe().pick_symbol
+        for x in result:
+            self.assertIn(x, validInput, "Did not pick a valid input")
 
 if __name__ == '__main__':
         unittest.main()
