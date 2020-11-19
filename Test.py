@@ -4,8 +4,8 @@ import tic_tac_toe
 class Test(unittest.TestCase):
 
     def testRandAssign(self):
-        randomcheck=0   # +-10 window allowed
-        goodReturn=["1","2"]    #function is working as expected
+        randomcheck=0  # +-10 window allowed
+        goodReturn=["1","2"]   #function is working as expected
         for i in range(101):
             self.assertIn(tic_tac_toe().rand_start,goodReturn,"Did not randomly pick player")
             if tic_tac_toe().rand_start == "1":
