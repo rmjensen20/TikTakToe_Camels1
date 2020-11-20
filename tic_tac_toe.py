@@ -28,39 +28,7 @@ def showgameboard(gameboard,display):
         print("---------")
         print(gameboard[6]+" | "+gameboard[7]+" | "+gameboard[8])
 
-        #Don't need any of this down here
-        """ gameline=['-',' ','|',' ','-',' ','|',' ','-']
-        index=0
-        for item in gameboard[0:3]:
-            if item == 'X':
-                gameline[index] = 'X'
-            elif item == 'O':
-                gameline[index] = 'O'
-            index+=4
-        print("".join(gameline))
-        print("---------")
 
-        gameline2=['-',' ','|',' ','-',' ','|',' ','-']
-        index=0
-        for item in gameboard[3:6]:
-            if item == 'X':
-                gameline2[index] = 'X'
-            elif item == 'O':
-                gameline2[index] = 'O'
-            index+=4
-        print("".join(gameline2))
-        print("---------")
-
-        gameline3=['-',' ','|',' ','-',' ','|',' ','-']
-        index=0
-        for item in gameboard[6:]:
-            if item == 'X':
-                gameline3[index] = 'X'
-            elif item == 'O':
-                gameline3[index] = 'O'
-            index+=4
-        print("".join(gameline3))
-        print("---------") """
 
 def print_instructions(gameboard,display):
     #introductory print
@@ -251,18 +219,6 @@ def switch_player():
     elif current_player == False:
         current_player = True
     return
-
-#Dont think we ever actually use this   
-def new_game():
-    #if win_check is true, initialize a new game
-    gameboard=init_gameboard()
-    introdisplay="index"
-    print_instructions(gameboard,introdisplay)
-    playernames=get_names()
-    playerdata=pick_symbol(playernames)
-    start = rand_start()
-    if (start == "2"):
-        switch_player()
     
 def play_tic_tac_toe():
     gameboard=init_gameboard()
