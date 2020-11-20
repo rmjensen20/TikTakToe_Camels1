@@ -1,4 +1,8 @@
 from random import *
+import logging
+
+logging.basicConfig(filename='game_log.log',level=logging.INFO)
+logging.info('Logs for tik tak toe game:')
 
 game_being_played = True
 winner = None
@@ -268,6 +272,8 @@ def play_tic_tac_toe():
 play_tic_tac_toe()
     
             
+
+    
 
         
 
