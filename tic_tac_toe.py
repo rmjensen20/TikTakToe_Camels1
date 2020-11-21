@@ -117,6 +117,8 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
                 choosing=False
             else:
                 print("That was not a valid position, please try again.")
+        logstatement=str(name)+' choses '+str(position)
+        logging.info(logstatement)
         if(gameboard[position] == "-"):
             if(player):
                 try:
@@ -238,6 +240,7 @@ def switch_player():
     return
     
 def play_tic_tac_toe():
+    logging.info('Game begins')
     gameboard=init_gameboard()
     introdisplay="index"
     print_instructions(gameboard,introdisplay)
@@ -250,6 +253,7 @@ def play_tic_tac_toe():
     game_being_played = True
 
     while game_being_played:
+        logging.info('Turns begin')
         user_turn(current_player, gameboard, p1_symbol, p2_symbol,playernames)
     
         if(check_rows(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_columns(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0] or check_diagonals(gameboard, playernames, p1_symbol, p2_symbol) == playernames[0]):
@@ -275,6 +279,7 @@ def play_tic_tac_toe():
         #directions say we must account for all inputs
         play_again = play_again.upper()
         if (play_again == "Y" or play_again == "YES"):
+            logging.info('New game chosen')
             try:
                 play_tic_tac_toe()
                 playing_again = False
@@ -286,3 +291,10 @@ def play_tic_tac_toe():
             print("Please enter yes or no: ")
 
 play_tic_tac_toe()
+    
+            
+
+    
+
+  
+
