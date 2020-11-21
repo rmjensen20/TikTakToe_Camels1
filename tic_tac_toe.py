@@ -112,11 +112,17 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
         position = int(position) - 1
         if(gameboard[position] == "-"):
             if(player):
-                gameboard[position] = p1_symbol
-                turn = False
+                try:
+                    gameboard[position] = p1_symbol
+                    turn = False
+                except:
+                    logging.error("Gameboard could not be updated")
             else:
-                gameboard[position] = p2_symbol
-                turn = False
+                try:
+                    gameboard[position] = p2_symbol
+                    turn = False
+                except:
+                    logging.error("Gameboard could not be updated")
         else:
             print("That position is already taken, please enter a new one.")
    
@@ -262,8 +268,11 @@ def play_tic_tac_toe():
         #directions say we must account for all inputs
         play_again = play_again.upper()
         if (play_again == "Y" or play_again == "YES"):
-            play_tic_tac_toe()
-            playing_again = False
+            try:
+                play_tic_tac_toe()
+                playing_again = False
+            except:
+                logging.error("There was an unexpected error and a new game could not be started.")
         elif(play_again == "N" or play_again == "NO"):
             exit()
         else:

@@ -16,9 +16,11 @@ class Test(unittest.TestCase):
             print("Unsuitable Randomness")
                 
     def testWin(self):
-        self.assertTrue(tic_tac_toe.check_rows, "Win not found in rows")
-        self.assertTrue(tic_tac_toe.check_columns, "Win not found in columns")
-        self.assertTrue(tic_tac_toe.check_diagonals, "Win not found in diagonals")
+        Names = tic_tac_toe.get_names
+        #These return the name of the winner
+        self.assertIn(tic_tac_toe.check_rows, Names, "Win not found in rows")
+        self.assertIn(tic_tac_toe.check_columns, Names, "Win not found in columns")
+        self.assertIn(tic_tac_toe.check_diagonals, Names, "Win not found in diagonals")
         self.assertTrue(tic_tac_toe().win_check, "Win not found")
 
     def testInput(self):
