@@ -48,8 +48,15 @@ def print_instructions(gameboard,display):
 
 def get_names():
     #gets names, stores them in list temporarily
-    p1_name = input("Player 1, enter your name: ")
-    p2_name = input("Player 2, enter your name: ")
+    names = True
+    while(names):
+        p1_name = input("Player 1, enter your name: ")
+        p2_name = input("Player 2, enter your name: ")
+        if p2_name == p1_name:
+            logging.error("Names are the same")
+            print("Please do not enter the same names")
+        else:
+            names = False
     player_names = [p1_name,p2_name]
     return player_names
 
