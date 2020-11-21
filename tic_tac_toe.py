@@ -108,8 +108,15 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
         #prompts player to input move (index 1-9)
         #should say here whos turn it is
         print(name + " it is your turn")
-        position = input("Choose a position from 1-9: ")
-        position = int(position) - 1
+        choosing = True
+        validpos=["1","2","3","4","5","6","7","8","9"]
+        while choosing:
+            position = input("Choose a position from 1-9: ")
+            if position in validpos:
+                position = int(position) - 1
+                choosing=False
+            else:
+                print("That was not a valid position, please try again.")
         if(gameboard[position] == "-"):
             if(player):
                 try:
@@ -279,10 +286,3 @@ def play_tic_tac_toe():
             print("Please enter yes or no: ")
 
 play_tic_tac_toe()
-    
-            
-
-    
-
-        
-
