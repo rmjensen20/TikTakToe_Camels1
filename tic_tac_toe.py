@@ -58,6 +58,10 @@ def get_names():
         else:
             names = False
     player_names = [p1_name,p2_name]
+    logstatement= "Player 1 name is" + str(names[0])
+    logstatement2= "Player 2 name is" + str(names[1])
+    logging.info(logstatement)
+    logging.info(logstatement2)
     return player_names
 
 def pick_symbol(names):
