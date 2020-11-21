@@ -1,7 +1,7 @@
 from random import *
 import logging
 
-logging.basicConfig(filename='game_log.log',level=logging.INFO)
+logging.basicConfig(filename='game_log.log',level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',datefmt='%m-%d %H:%M',)
 logging.info('Logs for tik tak toe game:')
 
 game_being_played = True
