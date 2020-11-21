@@ -61,6 +61,8 @@ def pick_symbol(names):
         p1_symbol = input(p1_string)
 
         if p1_symbol == "X" or p1_symbol == "x":
+            logstatement=str(names[0])+' chooses '+ "X"
+            logging.info(logstatement)
             p1_symbol = "X"
             p2_symbol = "O"
             print(names[1]+", your symbol is 'O'.")
