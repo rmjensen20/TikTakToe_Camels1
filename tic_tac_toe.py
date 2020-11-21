@@ -82,6 +82,7 @@ def pick_symbol(names):
             picking = False
         else:
             print("Sorry, that is not an option. Please enter X or O.")
+            logging.error("Not a valid symbol selection")
         
     playerdata ={
         names[0]:p1_symbol,
