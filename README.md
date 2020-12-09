@@ -22,7 +22,11 @@
 
 # How to test the Game:
 
-### Open the "Test.py" file and run it.
+### To put tic_tac_toe.py into "test mode", open the program in an editing window and comment out the very last line (313) so it reads #play_tic_tac_toe(). Save the file.
+
+### This allows just the functions being tested to run.
+
+### Then, open the Test.py file and run it. Note that running this program in the command line is not recommended, rather run it in your editor (Module in IDLE).
 
 # How to Find Game Logs:
 
