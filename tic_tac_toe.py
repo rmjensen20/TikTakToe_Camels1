@@ -105,9 +105,9 @@ def rand_start():
     #randomly picks which player is going to start, this works now
     starting = randrange(0,101)  
     if starting < 50:
-        return "1"
+        return 1
     else:
-        return "2"
+        return 2
     
 def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
     turn = True
@@ -266,7 +266,7 @@ def play_tic_tac_toe():
     print_instructions(gameboard,introdisplay)
     playernames=get_names()
     p1_symbol, p2_symbol=pick_symbol(playernames)
-    start = rand_start()
+    start = str(rand_start())
     #player 2 is randomly starting so switch players
     if (start == "2"):
         switch_player()
