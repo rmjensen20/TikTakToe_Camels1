@@ -23,3 +23,9 @@
 # How to test the Game:
 
 ### Open the "Test.py" file and run it.
+
+# How to Find Game Logs:
+
+### Game logs are automatically generated in a file called 'game_log.log' in the same folder that you downloaded the game in.
+
+### The log file reports game events such as player data and turns as well as any errors/misinputs encountered.
