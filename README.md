@@ -18,6 +18,8 @@
 
 ### If using VisualStudioCode, hit the green arrow at the top right corner and follow the game in the output tab.
 
+### If you would rather run the game in your terminal, then open up a terminal shell window and change the current directory to our file that you have just downloaded. You can change directories by using the command "cd " followed by the name of the directory that you wiould like to switch to. Once the current directory is "TikTakToe_Camels1-main", then run the command "python tic_tac_toe.py" to start the game.
+
 ### Once the game has started read the intro, and follow the instructions on the Wiki page of our Github repository.
 
 # How to test the Game:
