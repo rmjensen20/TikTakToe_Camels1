@@ -37,7 +37,7 @@ def showgameboard(gameboard,display):
 def print_instructions(gameboard,display):
     #introductory print
     print("Welcome to Tik-Tak-Toe by Camels_1")
-    print("This is a two-player tik-tak-toe game. The game is turn-based and played on a 3x3 grid,"\
+    print("This is a two-player tic-tac-toe game. The game is turn-based and played on a 3x3 grid,"\
     "where the goal is to match your symbol 3 in a row horizontally, vertically, or diagonally."\
     " Try and get a match before your opponent does while also blocking them from winning. You will be prompted"\
     " to enter your name and pick your symbol, then enter moves one after another. The board is indexed like this:\n")
@@ -64,37 +64,42 @@ def get_names():
     logging.info(logstatement2)
     return player_names
 
-def pick_symbol(names):
+def pick_symbol(names,start):
     #user picks symbols
+    print("\n",str(names[start-1]),"will go first!","\n")
     picking = True
     while(picking):
-        p1_string = str(names[0]) + " enter your symbol (X/O): "
-        p1_symbol = input(p1_string)
+        string = str(names[start-1]) + " enter your symbol (X/O): "
+        symbol = input(string)
 
-        if p1_symbol == "X" or p1_symbol == "x":
-            logstatement=str(names[0])+' chooses '+ "X"
-            logstatement2=str(names[1])+' chooses '+ "O"
-            logging.info(logstatement)
-            logging.info(logstatement2)
-            p1_symbol = "X"
-            p2_symbol = "O"
-            print(names[1]+", your symbol is 'O'.")
-            print(names[0]+", your symbol is 'X'.")
-            picking = False
-        elif p1_symbol == "O" or p1_symbol == "o":
-            logstatement=str(names[0])+' chooses '+ "O"
-            logstatement2=str(names[1])+' chooses '+ "X"
-            logging.info(logstatement)
-            logging.info(logstatement2)
-            p1_symbol = "O"
-            p2_symbol="X"
-            print(names[0]+", your symbol is 'O'.")
-            print(names[1]+", your symbol is 'X'.")
+
+        if symbol == "X" or symbol == "x":
+            if start == 1:
+                p1_symbol = "X"
+                p2_symbol = "O"
+            else:
+                p1_symbol = "O"
+                p2_symbol = "X"
+            picking=False
+        elif symbol == "O" or symbol == "o":
+            if start == 1:
+                p1_symbol = "O"
+                p2_symbol = "X"
+            else:
+                p1_symbol = "X"
+                p2_symbol = "O"
             picking = False
         else:
             print("Sorry, that is not an option. Please enter X or O.")
-            logging.error("Not a valid symbol selection")
-        
+            logging.error("Not a valid symbol selection")        
+
+    print(names[0]+", your symbol is",p1_symbol)
+    print(names[1]+", your symbol is",p2_symbol)
+    logstatement = str(names[0])+' chooses '+p1_symbol
+    logstatement2 = str(names[1])+' chooses '+p2_symbol
+    logging.info(logstatement)
+    logging.info(logstatement2)
+   
     playerdata ={
         names[0]:p1_symbol,
         names[1]:p2_symbol
@@ -137,7 +142,7 @@ def user_turn(player, gameboard, p1_symbol, p2_symbol,playernames):
                 choosing=False
             else:
                 print("That was not a valid position, please try again.")
-        logstatement=str(name)+' choses '+str(position)
+        logstatement=str(name)+' choses '+str(position+1)
         logging.info(logstatement)
         if(gameboard[position] == "-"):
             if(player):
@@ -265,8 +270,8 @@ def play_tic_tac_toe():
     introdisplay="index"
     print_instructions(gameboard,introdisplay)
     playernames=get_names()
-    p1_symbol, p2_symbol=pick_symbol(playernames)
     start = str(rand_start())
+    p1_symbol, p2_symbol=pick_symbol(playernames,int(start))
     #player 2 is randomly starting so switch players
     if (start == "2"):
         switch_player()
