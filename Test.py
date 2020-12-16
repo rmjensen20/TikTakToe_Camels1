@@ -45,7 +45,7 @@ class Test(unittest.TestCase):
     def testInput(self):
         #valid symbols
         validInput = ["X","x","O","o"]
-        result = pick_symbol(['Player1','Player2'])
+        result = pick_symbol(['Player1','Player2'],1)
         for x in result:
             self.assertIn(x, validInput, "Did not pick a valid input")
         print("Symbol selection works as intended, check misinputs properly")
